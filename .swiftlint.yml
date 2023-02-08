@@ -1,4 +1,4 @@
-# word ProjectName replace with the real name of the project
+# Word `ProjectName` replace with the real name of the project
 
 # By default, SwiftLint uses a set of sensible default rules you can adjust:
 disabled_rules: # rule identifiers turned on by default to exclude from running
