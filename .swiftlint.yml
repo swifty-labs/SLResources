@@ -1,0 +1,153 @@
+# word ProjectName replace with the real name of the project
+
+# By default, SwiftLint uses a set of sensible default rules you can adjust:
+disabled_rules: # rule identifiers turned on by default to exclude from running
+ - void_return # Prefer -> Void over -> ()
+ - void_function_in_ternary # Using ternary to call Void functions should be avoided
+ - statement_position # Else and catch should be on the same line, one space after the previous declaration
+
+included: # paths to include during linting. `--path` is ignored if present.
+ - ProjectName
+
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+ - Carthage
+ - Pods
+
+opt_in_rules: # some rules are turned off by default, so you need to opt-in
+ - accessibility_trait_for_button # SwiftUI - All views with tap gestures added preferring Button over Text
+ - anyobject_protocol # Prefer using AnyObject over class for class-only protocols
+ - balanced_xctest_lifecycle # Test classes must implement balanced setUp and tearDown methods
+ - closure_spacing # Closure expressions should have a single space inside each brace
+ - collection_alignment # All elements in a collection literal should be vertically aligned
+ - comma_inheritance # Use commas to separate types in inheritance lists (avoid -> A: Codable & Equatable {})
+ - contains_over_filter_count # Prefer contains over comparing filter(where:).count to 0
+ - contains_over_filter_is_empty # Prefer contains over using filter(where:).isEmpty
+ - contains_over_first_not_nil # Prefer contains over first(where:) != nil and firstIndex(where:) != nil.
+ - contains_over_range_nil_comparison # Prefer contains over range(of:) != nil and range(of:) == nil
+ - convenience_type # Types used for hosting only static members should be implemented as a caseless enum to avoid instantiation
+ - discouraged_assert # Prefer assertionFailure() and/or preconditionFailure() over assert(false)
+ - discouraged_object_literal # Prefer initializers over object literals
+ - discouraged_optional_boolean # Prefer non-optional booleans over optional booleans
+ - empty_collection_literal # Prefer checking isEmpty over comparing collection to an empty array or dictionary literal
+ - empty_count # Prefer checking isEmpty over comparing count to zero
+ - empty_string # Prefer checking isEmpty over comparing string to an empty string literal
+ - empty_xctest_method # Empty XCTest method should be avoided
+ - enum_case_associated_values_count # The number of associated values in an enum case should be low (max: 4)
+ - fallthrough # Fallthrough should be avoided
+ - fatal_error_message # A fatalError call should have a message (avoid -> fatalError(""))
+ - file_header # Header comments should be consistent with project patterns
+ - file_name # File name should match a type or extension declared in the file (if any)
+ - file_name_no_space # File name should not contain any whitespace
+ - first_where # Prefer using .first(where:) over .filter { }.first in collections
+ - flatmap_over_map_reduce # Prefer flatMap over map followed by reduce([], +)
+ - force_unwrapping # Force unwrapping should be avoided (avoid -> let url = NSURL(string: query)!)
+ - ibinspectable_in_extension # Extensions shouldn’t add @IBInspectable properties
+ - identical_operands # Comparing two identical operands is likely a mistake (avoid -> foo == foo)
+ - implicit_return # Prefer implicit returns in closures, functions and getters (avoid -> foo.map { return $0 + 1} )
+ - inert_defer # If defer is at the end of its parent scope, it will be executed right where it is anyway
+ - joined_default_parameter # Discouraged explicit usage of the default separator (avoid -> bar.joined(separator: ""))
+ - last_where # Prefer using .last(where:) over .filter { }.last in collections
+ - literal_expression_end_indentation # Array and dictionary literal end should have the same indentation as the line that started it
+ - lower_acl_than_parent # Ensure declarations have a lower access control level than their enclosing parent
+ - modifier_order # Modifier order should be consistent (avoid -> convenience required public init())
+ - multiline_arguments # Arguments should be either on the same line, or one per line
+ - multiline_function_chains # Chained function calls should be either on the same line, or one per line
+ - multiline_parameters # Functions and methods parameters should be either on the same line, or one per line
+ - operator_usage_whitespace # Operators should be surrounded by a single whitespace when they are being used (avoid -> let foo = 1 +2)
+ - overridden_super_call # Some overridden methods should always call super (viewDidLoad, viewWillAppear...)
+ - override_in_extension # Extensions shouldn’t override declarations
+ - prefer_zero_over_explicit_init # Prefer .zero over explicit init with zero parameters (avoid -> CGPoint(x: 0, y: 0))
+ - redundant_type_annotation # Variables should not have redundant type annotation (avoid -> var url: URL = URL())
+ - shorthand_optional_binding # Use shorthand syntax for optional binding (avoid -> if let i = i {})
+ - single_test_class # Test files should contain a single class
+ - sorted_first_last # Prefer using min() or max() over sorted().first or sorted().last
+ - switch_case_on_newline # Cases inside a switch should always be on a newline
+ - toggle_bool # Prefer someBool.toggle() over someBool = !someBool
+ - trailing_closure # Trailing closure syntax should be used whenever possible
+ - type_contents_order # Specifies the order of subtypes, properties, methods & more within a type
+ - unneeded_parentheses_in_closure_argument # Parentheses are not needed when declaring closure arguments (avoid -> { (bar) in } )
+ - unowned_variable_capture # Prefer capturing references as weak to avoid potential crashes (avoid -> { [unowned self] in _ } )
+ - untyped_error_in_catch # Catch statements should not declare error variables without type casting (avoid -> } catch var error { )
+ - weak_delegate # Delegates should be weak to avoid reference cycles
+ - xct_specific_matcher # Prefer specific XCTest matchers over XCTAssertEqual and XCTAssertNotEqual (avoid -> XCTAssertEqual(foo, true))
+ - yoda_condition # The constant literal should be placed on the right-hand side of the comparison operator (avoid -> if 42 == foo {} )
+
+analyzer_rules: # Rules run by `swiftlint analyze` (experimental)
+ - unused_import # All imported modules should be required to make the file compile
+
+# configurable rules can be customized from this configuration file
+line_length:
+  warning: 140 # default 120
+  ignores_function_declarations: true
+  ignores_comments: true
+  ignores_interpolated_strings: true
+  ignores_urls: true
+identifier_name:
+  excluded:
+   - id
+   - ap
+  min_length:
+    warning: 2
+type_name:
+  excluded:
+   - Id
+cyclomatic_complexity:
+  ignores_case_statements: true
+file_length:
+  - 500 # default 400
+file_name:
+  excluded:
+   - Typealias.swift
+type_contents_order:
+  order:
+   - ib_outlet # @IBOutlet var view: UIView!
+   - case # case networkError
+   - [type_alias, associated_type] # typealias NoArgClousse = () -> (), associatedtype DataType
+   - subtype # enum TestEnum
+   - type_property # static let cellIdentifier = "AmazingCell"
+   - instance_property # var shouldLayoutView: Bool
+   - initializer # init() {}
+   - deinitializer # deinit() {}
+   - view_life_cycle_method # override func viewDidLoad()
+   - type_method # static func makeViewController()
+   - [other_method, ib_action] # func goToNextVc(), @IBAction func goNextButtonPressed()
+trailing_whitespace:
+  ignores_empty_lines: true
+type_name:
+  min_length:
+    warning: 0
+file_header:
+  required_pattern: |
+                    \/\/
+                    \/\/  .*?\.swift
+                    \/\/  ProjectName.*?
+                    \/\/
+                    \/\/  Created by .*?
+                    \/\/
+
+# Custom Rules
+custom_rules:
+  class_name_suffix_view_controller: # Type that inherits from UIViewController, must contain in the name "ViewController"
+    included: ".*.swift"
+    regex: 'class +\w+(?<!ViewController) *(?:<[^>]+>)? *: +\w+ViewController'
+    name: "Class Name Suffix ViewController"
+    message: "All `UIViewController` subclasses should end on `ViewController`."
+    severity: warning
+  class_name_suffix_table_view_cell: # Type that inherits from UITableViewCell, must contain in the name "TableViewCell"
+    included: ".*.swift"
+    regex: 'class +\w+(?<!TableViewCell) *(?:<[^>]+>)? *: +\w+TableViewCell'
+    name: "Class Name Suffix TableViewCell"
+    message: "All `UITableViewCell` subclasses should end on `TableViewCell`."
+    severity: warning
+  class_name_suffix_collection_view_cell: # Type that inherits from UICollectionViewCell, must contain in the name "CollectionViewCell"
+    included: ".*.swift"
+    regex: 'class +\w+(?<!CollectionViewCell) *(?:<[^>]+>)? *: +\w+CollectionViewCell'
+    name: "Class Name Suffix CollectionViewCell"
+    message: "All `UICollectionViewCell` subclasses should end on `CollectionViewCell`."
+    severity: warning
+  single_line_guard: # Use a single line guard for simple checks (trigger -> less than 10 characters after return)
+    included: ".*.swift"
+    regex: 'guard[^\{]{2,80}else\s*\{\s*\n\s*return.{2,17}\}'
+    name: "Single Line Guard"
+    message: "Use a single line guard for simple checks."
+    severity: warning
