@@ -5,6 +5,7 @@ disabled_rules: # rule identifiers turned on by default to exclude from running
  - void_return # Prefer -> Void over -> ()
  - void_function_in_ternary # Using ternary to call Void functions should be avoided
  - statement_position # Else and catch should be on the same line, one space after the previous declaration
+ - vertical_parameter_alignment # Function parameters should be aligned vertically if they are in multiple lines in a declaration
 
 included: # paths to include during linting. `--path` is ignored if present.
  - ProjectName
@@ -36,11 +37,9 @@ opt_in_rules: # some rules are turned off by default, so you need to opt-in
  - fallthrough # Fallthrough should be avoided
  - fatal_error_message # A fatalError call should have a message (avoid -> fatalError(""))
  - file_header # Header comments should be consistent with project patterns
- - file_name # File name should match a type or extension declared in the file (if any)
  - file_name_no_space # File name should not contain any whitespace
  - first_where # Prefer using .first(where:) over .filter { }.first in collections
  - flatmap_over_map_reduce # Prefer flatMap over map followed by reduce([], +)
- - force_unwrapping # Force unwrapping should be avoided (avoid -> let url = NSURL(string: query)!)
  - ibinspectable_in_extension # Extensions shouldn’t add @IBInspectable properties
  - identical_operands # Comparing two identical operands is likely a mistake (avoid -> foo == foo)
  - implicit_return # Prefer implicit returns in closures, functions and getters (avoid -> foo.map { return $0 + 1} )
@@ -95,9 +94,6 @@ cyclomatic_complexity:
   ignores_case_statements: true
 file_length:
   - 500 # default 400
-file_name:
-  excluded:
-   - Typealias.swift
 type_contents_order:
   order:
    - ib_outlet # @IBOutlet var view: UIView!
